@@ -35,6 +35,12 @@ class ActivitiesViewModel : ViewModel() {
             currentState.activities[activityIndex].isUserAttended =
                 !(currentState.activities[activityIndex].isUserAttended)
 
+            if (currentState.activities[activityIndex].isUserAttended) {
+                currentState.activities[activityIndex].attendedUserNumber += 1
+            }else{
+                currentState.activities[activityIndex].attendedUserNumber -= 1
+            }
+
             currentState.copy(
                 activities = currentState.activities,
                 attendedActivities = currentState.activities.filter { it.isUserAttended },

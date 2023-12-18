@@ -2,7 +2,6 @@ package com.example.activitamins.presentation.screens
 
 import android.app.DatePickerDialog
 import android.widget.DatePicker
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.example.activitamins.data.Activities
 import com.example.activitamins.presentation.components.ui.FormItem
 import com.example.activitamins.presentation.components.ui.PageTitle
+import com.example.activitamins.utils.ShortToast
 import com.example.activitamins.viewModel.ActivitiesViewModel
 import java.util.Calendar
 import java.util.Date
@@ -58,7 +58,10 @@ fun CreateActivity(
     }
 
     val activityCreatedToast =
-        Toast.makeText(LocalContext.current, "Activity Created", Toast.LENGTH_SHORT)
+        ShortToast(LocalContext.current, "Activity Created")
+
+    val formErrorToast = ShortToast(ctx = LocalContext.current, message = "Please fill all fields")
+
 
     fun clearFields() {
         setName("")
@@ -68,6 +71,10 @@ fun CreateActivity(
     }
 
     fun createActivity() {
+        if (name.isEmpty() || organizer.isEmpty() || description.isEmpty()) {
+            formErrorToast.show()
+            return
+        }
         val newActivity =
             Activities(
                 activitiesViewModal.uiState.value.nextActivityId,

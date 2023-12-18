@@ -25,8 +25,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
 import androidx.navigation.NavController
 import com.example.activitamins.R
 import java.text.DateFormat
@@ -75,7 +75,7 @@ fun ActivityCard(
                 ) {
                     Image(
                         painterResource(id = R.drawable.activity1),
-                        contentDescription = ""
+                        contentDescription = "activity1"
                     )
 
                 }
@@ -89,20 +89,32 @@ fun ActivityCard(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
-                Text(text = title, fontSize = MaterialTheme.typography.headlineSmall.fontSize)
-                IconButton(
-                    modifier = Modifier.zIndex(3f),
-                    onClick = {
-                        if (isFavouriteState !== null && index !== null && toggleFavourite !== null) {
-                            isFavouriteState = !isFavouriteState!!
-                            toggleFavourite(index)
-                        }
-                    }) {
-                    Icon(
-                        Icons.Outlined.Star,
-                        contentDescription = "fav",
-                        tint = if (isFavouriteState !== null && isFavouriteState == true) Color.Yellow else Color.Black
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+
+                ) {
+                    Text(
+                        text = title,
+                        fontSize = MaterialTheme.typography.headlineSmall.fontSize,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
+                }
+                Column {
+                    IconButton(
+                        onClick = {
+                            if (isFavouriteState !== null && index !== null && toggleFavourite !== null) {
+                                isFavouriteState = !isFavouriteState!!
+                                toggleFavourite(index)
+                            }
+                        }) {
+                        Icon(
+                            Icons.Outlined.Star,
+                            contentDescription = "fav",
+                            tint = if (isFavouriteState !== null && isFavouriteState == true) Color.Yellow else Color.Black
+                        )
+                    }
                 }
             }
 

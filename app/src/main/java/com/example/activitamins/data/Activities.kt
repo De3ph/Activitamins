@@ -120,5 +120,14 @@ val allActivities = listOf(
         attendedUserNumber = 395,
         isUserAttended = true
     ) {},
+    object : Activities(
+        12,
+        "Spring Animations in InDesign with Mrs Fisenkci",
+        Date(),
+        "Complete Tutorial on how to create animations in InDesign",
+        "Adobe Academy",
+        attendedUserNumber = 395,
+        isUserAttended = true
+    ) {},
 )
 

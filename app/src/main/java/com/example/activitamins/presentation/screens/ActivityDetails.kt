@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -32,9 +34,11 @@ fun ActivityDetails(
     activitiesViewModel: ActivitiesViewModel
 ) {
 
+    val scrollState = rememberScrollState()
+
     val activity = activitiesViewModel.uiState.collectAsState().value.activities[index.toInt()]
     val date = DateFormatter(activity.date)
-    val attendState by remember {
+    val attendState by remember(activity.isUserAttended) {
         derivedStateOf {
             if (activity.isUserAttended) "Unattend" else "Attend"
         }
@@ -46,12 +50,15 @@ fun ActivityDetails(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 5.dp, vertical = 10.dp),
+            .padding(horizontal = 5.dp, vertical = 10.dp)
+            .verticalScroll(scrollState),
 
         verticalArrangement = Arrangement.spacedBy(30.dp)
 
     ) {
-        Column {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
             Row {
                 PageTitle("Details of ${activity.title}")
             }
@@ -61,7 +68,7 @@ fun ActivityDetails(
                     style = MaterialTheme.typography.labelLarge
                 )
                 Text(
-                    text = " people attended this activity",
+                    text = " people attended to this activity",
                     style = MaterialTheme.typography.labelLarge.copy(
                         color = Color.Gray
                     )

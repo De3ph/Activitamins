@@ -23,6 +23,7 @@ fun FormItem(
             value = inputVal,
             onValueChange = onInputChange,
             placeholder = { Text(text = "Hiking") },
+            maxLines = 2
         )
     }
 }
