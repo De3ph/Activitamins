@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -31,6 +33,10 @@ fun CreateActivity(
     activitiesViewModal: ActivitiesViewModel
 ) {
 
+    val scrollState = rememberScrollState()
+
+    // Form Fields
+
     var name by remember { mutableStateOf("") }
     fun setName(it: String) {
         name = it
@@ -41,11 +47,9 @@ fun CreateActivity(
             Date()
         )
     }
-
     fun setDate(it: Date) {
         date = it
     }
-
 
     var organizer by remember { mutableStateOf("") }
     fun setOrganizer(it: String) {
@@ -57,18 +61,19 @@ fun CreateActivity(
         description = it
     }
 
-    val activityCreatedToast =
-        ShortToast(LocalContext.current, "Activity Created")
-
-    val formErrorToast = ShortToast(ctx = LocalContext.current, message = "Please fill all fields")
-
-
     fun clearFields() {
         setName("")
         setOrganizer("")
         setDescription("")
         setDate(Date())
     }
+
+    // Toasts
+
+    val activityCreatedToast =
+        ShortToast(LocalContext.current, "Activity Created")
+
+    val formErrorToast = ShortToast(ctx = LocalContext.current, message = "Please fill all fields")
 
     fun createActivity() {
         if (name.isEmpty() || organizer.isEmpty() || description.isEmpty()) {
@@ -78,9 +83,9 @@ fun CreateActivity(
         val newActivity =
             Activities(
                 activitiesViewModal.uiState.value.nextActivityId,
-                name,
-                date,
-                description = "",
+                title = name,
+                date = date,
+                description = description,
                 organizer = organizer
             )
 
@@ -110,7 +115,9 @@ fun CreateActivity(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 5.dp, vertical = 10.dp),
+            .verticalScroll(scrollState)
+            .padding(horizontal = 5.dp, vertical = 10.dp)
+        ,
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
         PageTitle(title = "Create Activity")

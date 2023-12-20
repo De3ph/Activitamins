@@ -37,15 +37,18 @@ fun ActivityDetails(
     val scrollState = rememberScrollState()
 
     val activity = activitiesViewModel.uiState.collectAsState().value.activities[index.toInt()]
-    val date = DateFormatter(activity.date)
+
+    // activity.isUserAttended a göre attendState i değiştiriyoruz, buton text'i ve toast mesajı için
     val attendState by remember(activity.isUserAttended) {
         derivedStateOf {
             if (activity.isUserAttended) "Unattend" else "Attend"
         }
     }
 
-    val attendedToast = Toast.makeText(LocalContext.current, "Attended,", Toast.LENGTH_LONG)
-    attendedToast.verticalMargin.plus(100)
+    val date = DateFormatter(activity.date)
+
+
+    val attendedToast = Toast.makeText(LocalContext.current, "${attendState}ed", Toast.LENGTH_SHORT)
 
     Column(
         modifier = Modifier
@@ -109,6 +112,7 @@ fun ActivityDetails(
                 contentDescription = "activity image"
             )
         }
+
         Row(
             modifier = Modifier
                 .fillMaxWidth(),

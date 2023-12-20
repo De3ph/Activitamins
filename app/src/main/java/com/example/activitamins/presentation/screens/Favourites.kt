@@ -19,10 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
+import com.example.activitamins.data.Activities
 import com.example.activitamins.presentation.components.ui.PageTitle
 import com.example.activitamins.viewModel.ActivitiesViewModel
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.Calendar
-import java.util.Random
 
 
 @Composable
@@ -34,25 +36,35 @@ fun Favourites(
     val favourites = favouritesViewModel.uiState.collectAsState().value.activities.filter { it.isFavourite }
 
     fun createCalendarIntent(
-        title: String,
+        activity: Activities,
         location: String
     ): Intent {
+
+        // calendar intent with random date and time
         val calIntent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI).apply {
+            val date = LocalDateTime.ofInstant(activity.date.toInstant(),ZoneId.of("UTC"))
+
             val beginTime: Calendar = Calendar.getInstance().apply {
                 set(
-                    2024,
-                    Random().nextInt(12),
-                    Random().nextInt(30),
-                    Random().nextInt(24),
-                    Random().nextInt(59)
+                    date.year,
+                    date.monthValue,
+                    date.dayOfMonth,
+                    date.hour,
+                    date.second
                 )
             }
             val endTime = Calendar.getInstance().apply {
-                set(2024, 0, 23, 10, 30)
+                set(
+                    date.year,
+                    date.monthValue,
+                    date.dayOfMonth,
+                    date.hour + 1,
+                    date.second
+                )
             }
             putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.timeInMillis)
             putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.timeInMillis)
-            putExtra(CalendarContract.Events.TITLE, title)
+            putExtra(CalendarContract.Events.TITLE, activity.title)
             putExtra(CalendarContract.Events.EVENT_LOCATION, location)
         }
 
@@ -99,7 +111,7 @@ fun Favourites(
                             modifier = Modifier,
                             shape = MaterialTheme.shapes.extraSmall,
                             onClick = {
-                                val intent = createCalendarIntent(it.title, "Home")
+                                val intent = createCalendarIntent(it, "Home")
 
                                 startActivity(context, intent, null)
                             }) {
