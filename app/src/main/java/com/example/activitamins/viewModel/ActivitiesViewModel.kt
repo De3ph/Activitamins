@@ -3,9 +3,11 @@ package com.example.activitamins.viewModel
 import androidx.lifecycle.ViewModel
 import com.example.activitamins.data.Activities
 import com.example.activitamins.data.allActivities
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import javax.inject.Inject
 
 data class ActivitiesUiState(
     val activities: List<Activities> =
@@ -14,7 +16,8 @@ data class ActivitiesUiState(
     val nextActivityId : Int = allActivities.size
 )
 
-class ActivitiesViewModel : ViewModel() {
+@HiltViewModel
+class ActivitiesViewModel @Inject constructor(): ViewModel() {
     private val _uiState = MutableStateFlow(ActivitiesUiState())
 
     val uiState = _uiState.asStateFlow()

@@ -1,10 +1,11 @@
-package com.example.activitamins
+package com.example.activitamins.presentation.mainActivity
 
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,26 +17,22 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.activitamins.presentation.components.layout.BottomBar
 import com.example.activitamins.presentation.components.layout.TopBar
+import com.example.activitamins.presentation.navigation.NavGraph
 import com.example.activitamins.presentation.navigation.Screens
-import com.example.activitamins.presentation.screens.ActivityDetails
-import com.example.activitamins.presentation.screens.CreateActivity
-import com.example.activitamins.presentation.screens.Explore
-import com.example.activitamins.presentation.screens.Favourites
-import com.example.activitamins.presentation.screens.Profile
 import com.example.activitamins.ui.theme.AppTheme
 import com.example.activitamins.viewModel.ActivitiesViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavController
-    private val activitiesViewModel = ActivitiesViewModel()
+
+    // ViewModel injection
+    // viewModels() activity den geldiğinden sadece activity scope'unda kullanılabilir
+    private val activitiesViewModel: ActivitiesViewModel by viewModels()
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,33 +43,11 @@ class MainActivity : ComponentActivity() {
             Main(
                 navController = navController
             ) {
-                NavHost(
-                    navController = navController as NavHostController,
-                    startDestination = Screens.ExploreScreen.title
-                ) {
-
-                    composable(Screens.ExploreScreen.title) {
-                        Explore(navController, activitiesViewModel)
-                    }
-                    composable(Screens.CreateActivityScreen.title) {
-                        CreateActivity(activitiesViewModel)
-                    }
-                    composable(Screens.FavouritesScreen.title) {
-                        Favourites(this@MainActivity, activitiesViewModel)
-                    }
-                    composable(Screens.ProfileScreen.title) {
-                        Profile(activitiesViewModel = activitiesViewModel)
-                    }
-                    composable("details/{index}",
-                        arguments = listOf(
-                            navArgument("index") {
-                                type = NavType.StringType
-                            }
-                        )
-                    ) {
-                        ActivityDetails(index = it.arguments?.getString("index")!!, activitiesViewModel)
-                    }
-                }
+                NavGraph(
+                    ctx = this@MainActivity,
+                    navController = navController,
+                    activitiesViewModel = activitiesViewModel
+                )
             }
 
         }
