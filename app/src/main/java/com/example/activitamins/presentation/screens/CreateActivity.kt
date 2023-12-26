@@ -20,7 +20,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.activitamins.data.Activities
+import com.example.activitamins.data.ActivitiesData
+import com.example.activitamins.data.dto.ActivitiesDto
 import com.example.activitamins.presentation.components.ui.FormItem
 import com.example.activitamins.presentation.components.ui.PageTitle
 import com.example.activitamins.utils.ShortToast
@@ -81,8 +82,7 @@ fun CreateActivity(
             return
         }
         val newActivity =
-            Activities(
-                activitiesViewModal.uiState.value.nextActivityId,
+            ActivitiesDto(
                 title = name,
                 date = date,
                 description = description,

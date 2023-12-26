@@ -19,7 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat.startActivity
-import com.example.activitamins.data.Activities
+import com.example.activitamins.data.ActivitiesData
+import com.example.activitamins.data.dto.ActivitiesDto
 import com.example.activitamins.presentation.components.ui.PageTitle
 import com.example.activitamins.viewModel.ActivitiesViewModel
 import java.time.LocalDateTime
@@ -36,7 +37,7 @@ fun Favourites(
     val favourites = favouritesViewModel.uiState.collectAsState().value.activities.filter { it.isFavourite }
 
     fun createCalendarIntent(
-        activity: Activities,
+        activity: ActivitiesDto,
         location: String
     ): Intent {
 

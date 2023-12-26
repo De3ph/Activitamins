@@ -15,19 +15,19 @@ sealed class Screens(
     val defaultIcon: ImageVector?,
     val activeIcon: ImageVector?
 ) {
-    object ExploreScreen : Screens(
+    data object ExploreScreen : Screens(
         1, "Explore", Icons.Outlined.Search, Icons.Outlined.Search
     )
 
-    object CreateActivityScreen :
+    data object CreateActivityScreen :
         Screens(3, "Create Activity", Icons.Outlined.Add, Icons.Outlined.Add)
 
-    object FavouritesScreen :
+    data object FavouritesScreen :
         Screens(2, "Favourites", Icons.Outlined.FavoriteBorder, Icons.Outlined.Favorite)
 
-    object ProfileScreen : Screens(4, "Profile", Icons.Outlined.Person, Icons.Filled.Person)
+    data object ProfileScreen : Screens(4, "Profile", Icons.Outlined.Person, Icons.Filled.Person)
 
-    object DetailsScreen : Screens(5,"Details", null, null)
+    data object DetailsScreen : Screens(5,"Details", null, null)
 }
 
 val ScreensList = listOf(
