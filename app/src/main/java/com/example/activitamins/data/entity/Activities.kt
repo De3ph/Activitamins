@@ -2,6 +2,7 @@ package com.example.activitamins.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.activitamins.data.Tag
 import com.example.activitamins.data.dto.ActivitiesDto
 import io.mcarle.konvert.api.KonvertTo
 import java.util.Date
@@ -15,7 +16,8 @@ class Activities(
     var organizer: String,
     var isFavourite: Boolean = false,
     var attendedUserNumber: Int = 0,
-    var isUserAttended: Boolean = false
+    var isUserAttended: Boolean = false,
+    var tag: Tag
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

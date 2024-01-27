@@ -20,7 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.example.activitamins.data.ActivitiesData
+import com.example.activitamins.data.Tag
 import com.example.activitamins.data.dto.ActivitiesDto
 import com.example.activitamins.presentation.components.ui.FormItem
 import com.example.activitamins.presentation.components.ui.PageTitle
@@ -86,7 +86,8 @@ fun CreateActivity(
                 title = name,
                 date = date,
                 description = description,
-                organizer = organizer
+                organizer = organizer,
+                tag = Tag.Empty
             )
 
         activitiesViewModal.addActivity(newActivity)

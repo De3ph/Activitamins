@@ -6,11 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedSuggestionChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -29,6 +31,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.activitamins.R
+import com.example.activitamins.data.Tag
 import java.text.DateFormat
 import java.util.Date
 
@@ -40,6 +43,7 @@ fun ActivityCard(
     title: String,
     date: Date,
     organizer: String,
+    tag: Tag,
     isFavourite: Boolean?,
     navController: NavController?,
     toggleFavourite: ((Int) -> Unit)?
@@ -132,6 +136,26 @@ fun ActivityCard(
                     fontWeight = MaterialTheme.typography.bodyMedium.fontWeight
                 )
 
+                ElevatedSuggestionChip(
+                    modifier = Modifier.height(25.dp),
+                    label = {
+                        Text(
+                            modifier = Modifier,
+                            text = tag.value
+                        )
+                    },
+                    onClick = {}
+                )
+
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.End,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Text(
                     modifier = Modifier.wrapContentWidth(),
                     text = organizer,
@@ -139,7 +163,6 @@ fun ActivityCard(
                     softWrap = true,
                     maxLines = 1
                 )
-
             }
         }
     }

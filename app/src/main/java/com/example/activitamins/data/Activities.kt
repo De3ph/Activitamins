@@ -24,29 +24,34 @@ val dummyData = arrayOf(
         "Tech Events Inc.",
         true,
         attendedUserNumber = 12238,
-        isUserAttended = true
+        isUserAttended = true,
+        tag = Tag.Informative,
     ),
     Activities(
         "Music Festival",
         Date(),
         "Have fun with this",
         "Music Festivals Co.",
-        attendedUserNumber = 1543
-    ),
+        attendedUserNumber = 1543,
+        tag = Tag.ArtMusic,
+
+        ),
     Activities(
         "Fitness Workshop",
         Date(),
         "Have fun with this",
         "Health and Fitness LLC",
         attendedUserNumber = 98,
-        isUserAttended = true
+        isUserAttended = true,
+        tag = Tag.Sport
     ),
     Activities(
         "Community Cleanup",
         Date(),
         "Have fun with this",
         "Green Earth Organization",
-        attendedUserNumber = 0
+        attendedUserNumber = 0,
+        tag = Tag.Nature
     ),
     Activities(
         "Tech Meetup",
@@ -54,14 +59,18 @@ val dummyData = arrayOf(
         "Have fun with this",
         "Tech Enthusiasts Group",
         true,
-        attendedUserNumber = 238
+        attendedUserNumber = 238,
+        tag = Tag.Informative
+
     ),
     Activities(
         "Art Exhibition",
         Date(),
         "Have fun with this",
         "Creative Arts Society",
-        attendedUserNumber = 2060
+        attendedUserNumber = 2060,
+        tag = Tag.ArtMusic
+
     ),
     Activities(
         "Food Tasting",
@@ -69,7 +78,8 @@ val dummyData = arrayOf(
         "Have fun with this",
         "Culinary Explorers Club",
         true,
-        attendedUserNumber = 853
+        attendedUserNumber = 853,
+        tag = Tag.Food
     ),
     Activities(
         "Career Fair",
@@ -77,21 +87,24 @@ val dummyData = arrayOf(
         "Have fun with this",
         "Job Seekers Network",
         attendedUserNumber = 51,
-        isUserAttended = true
+        isUserAttended = true,
+        tag = Tag.Informative
     ),
     Activities(
         "Film Screening",
         Date(),
         "Have fun with this",
         "Film Buffs Association",
-        attendedUserNumber = 99
+        attendedUserNumber = 99,
+        tag = Tag.ArtMusic
     ),
     Activities(
         "Science Symposium",
         Date(),
         "Have fun with this",
         "Scientific Research Institute",
-        attendedUserNumber = 126
+        attendedUserNumber = 126,
+        tag = Tag.Science
     ),
     Activities(
         "Book Club Meeting",
@@ -99,7 +112,8 @@ val dummyData = arrayOf(
         "Have fun with this",
         "Bookworms Society",
         true,
-        attendedUserNumber = 18
+        attendedUserNumber = 18,
+        tag = Tag.Cultural
     ),
     Activities(
         "Fashion Show",
@@ -107,7 +121,8 @@ val dummyData = arrayOf(
         "Have fun with this",
         "Fashion Designers Guild",
         attendedUserNumber = 395,
-        isUserAttended = true
+        isUserAttended = true,
+        tag = Tag.Fashion
     ),
     Activities(
         "Spring Animations in InDesign with Mrs Fisenkci",
@@ -115,7 +130,8 @@ val dummyData = arrayOf(
         "Complete Tutorial on how to create animations in InDesign",
         "Adobe Academy",
         attendedUserNumber = 395,
-        isUserAttended = true
+        isUserAttended = true,
+        tag = Tag.Informative
     )
 )
 

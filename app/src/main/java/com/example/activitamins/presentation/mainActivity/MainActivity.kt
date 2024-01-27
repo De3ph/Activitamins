@@ -16,12 +16,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.activitamins.presentation.components.layout.BottomBar
 import com.example.activitamins.presentation.components.layout.TopBar
 import com.example.activitamins.presentation.navigation.NavGraph
-import com.example.activitamins.presentation.navigation.Screens
 import com.example.activitamins.ui.theme.AppTheme
 import com.example.activitamins.viewModel.ActivitiesViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,6 +36,10 @@ class MainActivity : ComponentActivity() {
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            val splashScreen = installSplashScreen()
+            splashScreen.setKeepOnScreenCondition { true }
+        }
 
         super.onCreate(savedInstanceState)
         setContent {

@@ -1,6 +1,5 @@
 package com.example.activitamins.presentation.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,7 +15,6 @@ import com.example.activitamins.presentation.components.ui.ActivityCard
 import com.example.activitamins.presentation.components.ui.PageTitle
 import com.example.activitamins.viewModel.ActivitiesViewModel
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Explore(
     navController: NavController,
@@ -47,6 +45,7 @@ fun Explore(
                 date = activities[it].date,
                 organizer = activities[it].organizer,
                 isFavourite = activities[it].isFavourite,
+                tag = activities[it].tag,
                 navController = navController,
                 toggleFavourite = favouritesViewModel::toggleFavourite
             )
